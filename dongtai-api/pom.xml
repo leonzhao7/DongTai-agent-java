@@ -54,13 +54,13 @@
                         <id>copy-lib-src-webapps</id>
                         <phase>package</phase>
                         <configuration>
-                            <tasks>
+                            <target>
                                 <copy todir="./../dongtai-agent/src/main/resources/bin">
                                     <fileset dir="target/">
                                         <include name="dongtai-api.jar"/>
                                     </fileset>
                                 </copy>
-                            </tasks>
+                            </target>
                         </configuration>
                         <goals>
                             <goal>run</goal>
