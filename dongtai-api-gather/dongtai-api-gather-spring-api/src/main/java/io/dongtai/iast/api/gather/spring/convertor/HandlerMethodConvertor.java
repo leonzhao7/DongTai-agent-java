@@ -73,7 +73,7 @@ public class HandlerMethodConvertor {
         Response r = new Response();
 
         MediaType mediaType = new MediaType();
-        Schema schema = this.manager.convertClass(this.handlerMethod.getReturnType().getParameterType());
+        Schema schema = this.manager.convertType(this.handlerMethod.getReturnType().getGenericParameterType());
         mediaType.setSchema(schema);
 
         // 如果响应类型是引用类型的，则认为它返回的是json，否则就认为是*/*

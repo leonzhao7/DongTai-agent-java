@@ -81,7 +81,7 @@ public class MethodParameterConvertor {
         }
 
         // 参数的类型需要存储一下
-        Schema c = this.manager.convertClass(this.methodParameter.getParameterType());
+        Schema c = this.manager.convertType(this.methodParameter.getGenericParameterType());
         p.setSchema(c);
 
         return p;
@@ -173,7 +173,7 @@ public class MethodParameterConvertor {
         r.setRequired(true);
 
         MediaType mediaType = new MediaType();
-        mediaType.setSchema(this.manager.convertClass(this.methodParameter.getParameterType()));
+        mediaType.setSchema(this.manager.convertType(this.methodParameter.getGenericParameterType()));
 
         Map<String, MediaType> contentMap = new HashMap<>();
         contentMap.put(MediaType.APPLICATION_JSON, mediaType);

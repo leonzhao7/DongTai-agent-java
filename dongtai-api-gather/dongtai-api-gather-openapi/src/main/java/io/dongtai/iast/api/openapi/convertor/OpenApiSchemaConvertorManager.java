@@ -4,6 +4,8 @@ import io.dongtai.iast.api.openapi.domain.Schema;
 import io.dongtai.log.DongTaiLog;
 import io.dongtai.log.ErrorCode;
 
+import java.lang.reflect.*;
+
 /**
  * 转换器的入口类
  *
@@ -72,6 +74,35 @@ public class OpenApiSchemaConvertorManager {
         }
 
         // 转换不了就算球
+        return null;
+    }
+
+    public Schema convertType(Type genericType) {
+        if (genericType == null) {
+            return null;
+        }
+
+        if (genericType instanceof Class) {
+            return convertClass((Class<?>)genericType);
+        }
+
+        if (genericType instanceof ParameterizedType){
+            Type rawType = ((ParameterizedType)genericType).getRawType();
+            Schema parent = convertClass((Class<?>)rawType);
+            Type[] childrenTypes = ((ParameterizedType) genericType).getActualTypeArguments();
+            if (childrenTypes.length > 0) {
+                Type childType = childrenTypes[childrenTypes.length-1];
+                Schema child;
+                if (childType instanceof Class) {
+                    child = convertClass((Class<?>)childType);
+                } else {
+                    child = convertType(childType);
+                }
+                parent.setItems(child);
+            }
+            return parent;
+        }
+
         return null;
     }
 

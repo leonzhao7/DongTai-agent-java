@@ -22,6 +22,8 @@ public class DataType {
     // 如果是数组的话，是否是唯一的，其实就是用来标识是不是set类型的，因为是很多语言中都是有set类型的
     private Boolean uniqueItems;
 
+    private DataType additionalProperties;
+
     public DataType() {
     }
 
@@ -103,6 +105,10 @@ public class DataType {
         return new DataType("array", null, Object());
     }
 
+    public static DataType Map() {
+        return new DataType("map", null, null);
+    }
+
     public String getType() {
         return type;
     }
@@ -120,11 +126,20 @@ public class DataType {
     }
 
     public DataType getItems() {
-        return items;
+        if (additionalProperties == null) {
+            return items;
+        } else {
+            return additionalProperties;
+        }
     }
 
     public void setItems(DataType items) {
-        this.items = items;
+        if ("map".equals(type)) {
+            type = "object";
+            this.additionalProperties = items;
+        } else {
+            this.items = items;
+        }
     }
 
     public Boolean getUniqueItems() {
@@ -138,7 +153,7 @@ public class DataType {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof DataType)) return false;
         DataType dataType = (DataType) o;
         return Objects.equals(type, dataType.type) && Objects.equals(format, dataType.format) && Objects.equals(items, dataType.items) && Objects.equals(uniqueItems, dataType.uniqueItems);
     }

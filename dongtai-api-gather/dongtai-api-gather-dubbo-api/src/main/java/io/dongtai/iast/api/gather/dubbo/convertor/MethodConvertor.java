@@ -70,7 +70,7 @@ public class MethodConvertor {
         Response r = new Response();
         Map<String, MediaType> contentMap = new HashMap<>();
         MediaType mediaType = new MediaType();
-        mediaType.setSchema(this.manager.convertClass(returnType));
+        mediaType.setSchema(this.manager.convertType(this.reflectionMethod.getGenericReturnType()));
         contentMap.put(MediaType.APPLICATION_JSON, mediaType);
         r.setContent(contentMap);
 

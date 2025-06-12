@@ -37,7 +37,7 @@ public class ParameterConvertor {
         openApiParameter.setRequired(true);
 
         // 参数的类型转为Open API的类型，如果有涉及到复合类型的话存储到Open API的组件库中
-        Schema schema = this.manager.convertClass(this.reflectionParameter.getType());
+        Schema schema = this.manager.convertType(this.reflectionParameter.getParameterizedType());
         openApiParameter.setSchema(schema);
 
         return openApiParameter;

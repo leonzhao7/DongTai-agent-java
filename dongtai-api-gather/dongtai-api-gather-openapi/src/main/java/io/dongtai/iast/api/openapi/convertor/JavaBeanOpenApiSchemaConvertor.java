@@ -2,9 +2,7 @@ package io.dongtai.iast.api.openapi.convertor;
 
 import io.dongtai.iast.api.openapi.domain.Schema;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
+import java.lang.reflect.*;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -160,6 +158,11 @@ public class JavaBeanOpenApiSchemaConvertor extends BaseOpenApiSchemaConvertor {
     @Override
     public Schema convert(Class clazz, Field field) {
         // 因为类型可能是各种类型，所以这里要调用manager上的来路由
+        Type genericType = field.getGenericType();
+        if (genericType instanceof ParameterizedType) {
+            return manager.convertType(genericType);
+        }
+
         return manager.convertClass(field.getType());
     }
 

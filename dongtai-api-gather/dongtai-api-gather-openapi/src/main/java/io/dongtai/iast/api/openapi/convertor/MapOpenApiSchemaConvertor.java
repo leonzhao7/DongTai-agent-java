@@ -3,6 +3,8 @@ package io.dongtai.iast.api.openapi.convertor;
 import io.dongtai.iast.api.openapi.domain.DataType;
 import io.dongtai.iast.api.openapi.domain.Schema;
 
+import java.util.Map;
+
 /**
  * 用于把Map类型转为Open API的类型
  *
@@ -22,13 +24,13 @@ public class MapOpenApiSchemaConvertor extends BaseOpenApiSchemaConvertor {
 
     @Override
     public boolean canConvert(Class clazz) {
-        return false;
+        return Map.class.isAssignableFrom(clazz);
     }
 
     @Override
     public Schema convert(Class clazz) {
         // 2023-6-30 10:39:26 暂不处理map
-        return new Schema(DataType.Object());
+        return new Schema(DataType.Map());
     }
 
 }
