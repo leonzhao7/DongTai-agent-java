@@ -44,6 +44,7 @@ public class Schema extends DataType {
         this.setType(dataType.getType());
         this.setFormat(dataType.getFormat());
         this.setItems(dataType.getItems());
+        this.setAdditionalProperties(dataType.getAdditionalProperties());
     }
 
     /**

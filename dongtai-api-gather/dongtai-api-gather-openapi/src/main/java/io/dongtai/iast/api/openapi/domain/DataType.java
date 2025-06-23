@@ -125,21 +125,28 @@ public class DataType {
         this.format = format;
     }
 
+//    TODO: map类型返回additionalProperties比较好，但会导致json序列化出错
     public DataType getItems() {
-        if (additionalProperties == null) {
-            return items;
-        } else {
-            return additionalProperties;
-        }
+        return items;
     }
 
     public void setItems(DataType items) {
-        if ("map".equals(type)) {
+//        TODO: map类型多次setItems会出错
+        if ("map".equals(type) && items != null) {
             type = "object";
             this.additionalProperties = items;
         } else {
             this.items = items;
         }
+    }
+
+    public DataType getAdditionalProperties() {
+        return additionalProperties;
+    }
+
+    public void setAdditionalProperties(DataType additionalProperties) {
+        type = "object";
+        this.additionalProperties = additionalProperties;
     }
 
     public Boolean getUniqueItems() {

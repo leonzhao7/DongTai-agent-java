@@ -40,6 +40,7 @@ public class Foo {
     private Map<String, String> m1;
     private Set<String> ss1;
     private List<String> list1;
+    private Map<String, Map<String, Bar>> m2;
 
     private List<Foo> list2;
     private List<List<Foo>> list3;
@@ -253,6 +254,14 @@ public class Foo {
 
     public void setM1(Map<String, String> m1) {
         this.m1 = m1;
+    }
+
+    public Map<String, Map<String, Bar>> getM2() {
+        return m2;
+    }
+
+    public void setM2(Map<String, Map<String, Bar>> m2) {
+        this.m2 = m2;
     }
 
     public Set<String> getSs1() {

@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 
 public class JavaBeanOpenApiSchemaConvertorTest {
@@ -27,7 +28,7 @@ public class JavaBeanOpenApiSchemaConvertorTest {
 
         Assert.assertFalse(convertor.canConvert(ArrayList.class));
         Assert.assertFalse(convertor.canConvert(HashSet.class));
-//        Assert.assertFalse(convertor.canConvert(HashMap.class));
+        Assert.assertFalse(convertor.canConvert(HashMap.class));
     }
 
     @Test
